@@ -54,6 +54,7 @@ frontend/
 ### 2.4 public/codingon.png
 
 - 헤더 요소 구현 시 필요한 **이미지** 파일입니다.
+- 해당 이미지는 [다음 링크](https://sesac.codingon.co.kr/1430-f/codingon.png)에서 다운받아 사용해주시기 바랍니다.
 
 ## 3. 기능 요구사항 및 배점
 

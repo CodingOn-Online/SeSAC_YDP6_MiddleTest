@@ -1,0 +1,31 @@
+@server = http://localhost:8080
+
+
+### 투두 전체 조회
+GET {{server}}/todos
+
+
+### 특정 ID를 갖는 투두 조회
+GET {{server}}/todos/1
+
+
+### 투두 생성
+POST {{server}}/todos
+Content-Type: application/json; charset=UTF-8
+
+{
+  "title": "책 읽기"
+}
+
+
+### 특정 ID를 갖는 투두 수정
+PATCH {{server}}/todos/1
+Content-Type: application/json; charset=UTF-8
+
+{
+  "done": true
+}
+
+
+### 특정 ID를 갖는 투두 삭제
+DELETE {{server}}/todos/1
