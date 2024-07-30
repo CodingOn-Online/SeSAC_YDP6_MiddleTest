@@ -43,6 +43,8 @@ backend/
 - 데이터베이스 설정 정보를 기록하는 JSON 파일입니다.
 - 원활한 채점을 위해 로컬 데이터베이스가 아닌 AWS RDS를 사용하여 데이터베이스 설정 정보는 제공됩니다. [제공된 가이드](https://www.notion.so/MySQL-Workbench-b0813628ea084016a007b0a0ddc1ae1d?pvs=4#c22159f5e81845a9bae2b01b1fd63bf8)에 따라 데이터베이스에 연결하여 프로젝트를 진행해주세요.
 
+  > 쉽게 말하면 지금까지는 로컬 컴퓨터의 데이터베이스에 접속하여 테이블을 생성했지만, 해당 과제에서는 미리 생성해놓은 외부 컴퓨터의 데이터베이스에 접속하여 과제를 진행하는 것입니다.
+
   ```json
   {
     "development": {
@@ -79,13 +81,14 @@ backend/
 ### 2.5 api.http
 
 - 해당 프로젝트를 채점할 때 사용할 REST API 테스트 문서입니다.
+- 해당 문서에 기입된 API 순서대로 기능 요구사항에 대한 채점이 이루어집니다. (요청에 대해 문제에서 제시한 가이드에 맞는 응답이 나와야 합니다.)
 - 해당 문서는 제공되므로 [다음 링크](https://sesac.codingon.co.kr/1650-ba/api.http)에서 다운받아 사용해주시기 바랍니다.
 
 ## 3. 기능 요구사항 및 배점
 
 3.1. [Todo 모델 정의](#31-todo-모델-정의-총-배점-25점)  
-3.2. [Todo 전체 조회](#32-todo-전체-조회-총-배점-25점)  
-3.3. [Todo 추가](#33-todo-추가-총-배점-25점)  
+3.2. [Todo 추가](#32-todo-추가-총-배점-25점)  
+3.3. [Todo 전체 조회](#33-todo-전체-조회-총-배점-25점)  
 3.4. [특정 ID의 Todo 조회](#34-특정-id의-todo-조회-총-배점-25점)  
 3.5. [특정 ID의 Todo 수정](#35-특정-id의-todo-수정-총-배점-25점)  
 3.6. [특정 ID의 Todo 삭제](#36-특정-id의-todo-삭제-총-배점-25점)
@@ -121,62 +124,12 @@ backend/
     - 불리언 타입
     - `null` 값 허용하지 않음
     - 기본값은 `false` 로 설정
-      > 힌트. `defaultValues` 옵션
+      > 힌트. `defaultValue` 옵션
 - 테이블 옵션
   - 테이블 이름을 모델 이름과 동일하게 고정
   - `createdAt` 컬럼과 `updatedAt` 컬럼 자동 추가
 
-### 3.2 Todo 전체 조회 (총 배점 2.5점)
-
-#### 채점 가이드
-
-- (배점 2.5점) 전체 Todo 목록이 보이는가?
-
-#### 요구사항
-
-> API 명세
-
-```http
-### 투두 전체 조회
-GET http://localhost:8080/todos
-```
-
-> Response Ex
-
-```json
-[
-  {
-    "id": 1,
-    "title": "아침 운동하기",
-    "done": false,
-    "createdAt": "2024-07-29T04:56:21.000Z",
-    "updatedAt": "2024-07-29T04:56:21.000Z"
-  },
-  {
-    "id": 2,
-    "title": "점심 식사 준비하기",
-    "done": false,
-    "createdAt": "2024-07-29T04:56:21.000Z",
-    "updatedAt": "2024-07-29T04:56:21.000Z"
-  },
-  {
-    "id": 3,
-    "title": "저녁에 책 읽기",
-    "done": false,
-    "createdAt": "2024-07-29T04:56:21.000Z",
-    "updatedAt": "2024-07-29T04:56:21.000Z"
-  },
-  {
-    "id": 4,
-    "title": "코딩 과제 완성하기",
-    "done": false,
-    "createdAt": "2024-07-29T04:56:21.000Z",
-    "updatedAt": "2024-07-29T04:56:21.000Z"
-  }
-]
-```
-
-### 3.3 Todo 추가 (총 배점 2.5점)
+### 3.2 Todo 추가 (총 배점 2.5점)
 
 #### 채점 가이드
 
@@ -261,6 +214,56 @@ Content-Type: application/json; charset=UTF-8
 {
   "message": "Internal Server Error"
 }
+```
+
+### 3.3 Todo 전체 조회 (총 배점 2.5점)
+
+#### 채점 가이드
+
+- (배점 2.5점) 전체 Todo 목록이 보이는가?
+
+#### 요구사항
+
+> API 명세
+
+```http
+### 투두 전체 조회
+GET http://localhost:8080/todos
+```
+
+> Response Ex
+
+```json
+[
+  {
+    "id": 1,
+    "title": "아침 운동하기",
+    "done": false,
+    "createdAt": "2024-07-29T04:56:21.000Z",
+    "updatedAt": "2024-07-29T04:56:21.000Z"
+  },
+  {
+    "id": 2,
+    "title": "점심 식사 준비하기",
+    "done": false,
+    "createdAt": "2024-07-29T04:56:21.000Z",
+    "updatedAt": "2024-07-29T04:56:21.000Z"
+  },
+  {
+    "id": 3,
+    "title": "저녁에 책 읽기",
+    "done": false,
+    "createdAt": "2024-07-29T04:56:21.000Z",
+    "updatedAt": "2024-07-29T04:56:21.000Z"
+  },
+  {
+    "id": 4,
+    "title": "코딩 과제 완성하기",
+    "done": false,
+    "createdAt": "2024-07-29T04:56:21.000Z",
+    "updatedAt": "2024-07-29T04:56:21.000Z"
+  }
+]
 ```
 
 ### 3.4 특정 ID의 Todo 조회 (총 배점 2.5점)
@@ -406,3 +409,9 @@ DELETE http://localhost:8080/todos/10
   "message": "Todo not found"
 }
 ```
+
+### 4. 과제 제출
+
+작성하신 코드를 **백엔드 과제 시간 내에 commit 을 기록**하여 GitHub repository에 push 해주세요. 백엔드 과제 시간 외에 기록된 commit 은 무시하고 채점됩니다.
+
+> 수고하셨습니다.
