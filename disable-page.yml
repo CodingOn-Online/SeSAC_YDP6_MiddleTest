@@ -1,0 +1,24 @@
+name: Disable GitHub Pages
+
+on:
+  schedule:
+    - cron: "30 1 30 7 *"
+
+jobs:
+  disable_pages:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Replace site content
+        run: |
+          echo "<html><body><h1>추가 접근이 불가능합니다.</h1></body></html>" > index.html
+          if [ -f CNAME ]; then rm CNAME; fi
+          git config user.name "CodingOn-Online"
+          git config user.email "codingon@spreatics.com"
+          git add index.html
+          git rm CNAME || true
+          git commit -m "Temporarily disable GitHub Pages"
+          git push
